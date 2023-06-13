@@ -1,0 +1,36 @@
+---
+- name: Install MySQL server
+  apt:
+    name: mariadb-server
+    state: present
+    update_cache: yes
+
+- name: Ensure MySQL service is running
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Set MySQL root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create WordPress database
+  mysql_db:
+    name: "{{ mysql_db_name }}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+
+- name: Create WordPress database user
+  mysql_user:
+    name: "{{ mysql_db_user }}"
+    password: "{{ mysql_db_password }}"
+    priv: "{{ mysql_db_name }}.*:ALL"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+    login_password: "{{ mysql_root_password }}"

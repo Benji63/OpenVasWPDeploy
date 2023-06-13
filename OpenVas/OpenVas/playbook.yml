@@ -1,0 +1,85 @@
+---
+- hosts: openvas
+  become: true
+  connection: ssh
+  tasks:
+    - name: Configuration du hostname
+      hostname:
+       name: "{{ HOSTNAME }}"
+
+    - name: Resolution du hostname
+      lineinfile:
+        regexp: ^127\.0\.1\.1\s.*$
+        line: "127.0.1.1 {{ HOSTNAME }} "
+        path: /etc/hosts
+
+    - name: Configurer dhclient
+      lineinfile:
+        regexp: ^#?prepend domain\-name\-servers .*$
+        line: "prepend domain-name-servers 8.8.8.8;"
+        path: /etc/dhcp/dhclient.conf
+      register: dhclient_conf
+
+    - name: Installation premiere partie des packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+          - docker.io
+          - docker-compose
+
+    # - name: Redémarrer les serveurs
+    #   reboot:
+    #   when: dhclient_conf.changed
+
+    - name: Recuperation du container
+      shell: docker pull mikesplain/openvas
+
+    - name: Lancement du container avec relais smtp parametré
+      shell: sudo docker run -d -p 443:443 -e OV_SMTP_HOSTNAME=smtp-relay.sendinblue.com -e OV_SMTP_PORT=587 -e OV_SMTP_USERNAME=openvasbachelor3@gmail.com -e OV_SMTP_KEY=Tm7zvFV8sdPbOGnZ --name openvas mikesplain/openvas
+
+    - name: Copie du fichier task_creation.sh
+      template:
+        src: task_creation.sh
+        dest: /opt/task_creation.sh
+
+    - name: Copie du fichier crontask.sh   
+      template:
+        src: crontask.sh   
+        dest: /opt/crontask.sh   
+
+    - name: Copie du fichier root
+      template:
+        src: root
+        dest: /opt/root   
+
+    - name: Copie du fichier task_creation.sh dans le docker
+      shell: sudo docker cp /opt/task_creation.sh openvas:/opt/task_creation.sh
+
+    - name: Copie du fichier crontask.sh dans le docker
+      shell: sudo docker cp /opt/crontask.sh openvas:/opt/crontask.sh
+
+    - name:  Ajout +x 
+      shell: sudo docker exec openvas chmod +x /opt/*.sh
+
+    - name:  update
+      shell: sudo docker exec openvas apt update
+
+    - name:  cron install
+      shell: sudo docker exec openvas apt install cron nano mailutils -y
+
+    - name: Copie du fichier root dans le docker
+      shell: sudo docker cp /opt/root openvas:/var/spool/cron/crontabs/root
+
+    - name: chmod 600
+      shell: sudo docker exec openvas chmod 600 /var/spool/cron/crontabs/root
+     
+    - name:  lancement service cron
+      shell: sudo docker exec openvas service cron start
+
+    - name: éxécution premiere tache
+      shell: sudo docker exec openvas /opt/task_creation.sh {{ IP_ADRESS_TARGET }} {{ EMAIL }}
+
+    - name:  Lancement inventaire réseau
+      shell: sudo docker exec openvas nmap -v -sn  192.168.33.0/24 | mail -s "Inventaire reseau" openvasbachelor3@gmail.com

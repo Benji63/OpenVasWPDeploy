@@ -1,0 +1,16 @@
+<?php
+define('DB_NAME', '{{ mysql_db_name }}');
+define('DB_USER', '{{ mysql_db_user }}');
+define('DB_PASSWORD', '{{ mysql_db_password }}');
+define('DB_HOST', 'localhost');
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+
+{% for key, value in wordpress_config.items() %}
+define('{{ key }}', {{ value }});
+{% endfor %}
+
+$table_prefix = 'wp_';
+
+define('ABSPATH', dirname(__FILE__) . '/');
+require_once(ABSPATH . 'wp-settings.php');

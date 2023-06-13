@@ -1,0 +1,24 @@
+server {
+    listen 80;
+    server_name {{ server_name }};
+    root /var/www/html/wordpress/wordpress/;
+
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location = / {
+        rewrite ^ /index.php;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}

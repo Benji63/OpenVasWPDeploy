@@ -1,0 +1,8 @@
+---
+- name: Create a new user with sudo privileges
+  user:
+    name: myuser
+    password: "{{ myuser_password | password_hash('sha512') }}"
+    state: present
+    groups: sudo
+    shell: /bin/bash

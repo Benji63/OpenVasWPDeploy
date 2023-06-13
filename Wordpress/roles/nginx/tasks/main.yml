@@ -1,0 +1,29 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Ensure Nginx is running and enabled on boot
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Configure Nginx for WordPress
+  template:
+    src: wordpress.conf.j2
+    dest: /etc/nginx/sites-available/wordpress.conf
+  notify: reload nginx
+
+- name: Enable WordPress site in Nginx
+  file:
+    src: /etc/nginx/sites-available/wordpress.conf
+    dest: /etc/nginx/sites-enabled/wordpress.conf
+    state: link
+
+- name: Remove default Nginx site configuration
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent

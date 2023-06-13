@@ -1,0 +1,16 @@
+---
+- name: Configure and deploy WordPress
+  hosts: default
+  become: yes
+  vars:
+    myuser_password: mysecretpassword
+    mysql_root_password: mysql_root_password
+    mysql_db_name: wordpress_db
+    mysql_db_user: wordpress_user
+    mysql_db_password: wordpress_password
+  roles:
+    - root_access
+    - openssh
+    - nginx
+    - db_setup
+    - wordpress

@@ -1,0 +1,63 @@
+---
+- name: Set WordPress path
+  set_fact:
+    wordpress_path: /var/www/html/wordpress
+
+- name: Install required packages
+  apt:
+    name:
+      - php-fpm
+      - php-mysql
+      - php-gd
+      - php-curl
+      - php-xml
+      - php-mbstring
+      - php-xmlrpc
+      - php-soap
+      - php-intl
+      - php-zip
+    state: present
+
+- name: Get the latest WordPress version
+  uri:
+    url: https://api.wordpress.org/core/version-check/1.7/
+    return_content: yes
+  register: wp_latest_version_response
+
+- name: Set the latest WordPress version variable
+  set_fact:
+    wordpress_version: "{{ wp_latest_version_response.json.offers[0].current }}"
+
+- name: Create WordPress directory
+  file:
+    path: "{{ wordpress_path }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Download and extract WordPress
+  unarchive:
+    src: "https://wordpress.org/wordpress-{{ wordpress_version }}.tar.gz"
+    dest: "{{ wordpress_path }}"
+    remote_src: yes
+    owner: www-data
+    group: www-data
+    creates: "{{ wordpress_path }}/wp-settings.php"
+
+- name: Copy WordPress configuration file
+  template:
+    src: wp-config.php.j2
+    dest: "{{ wordpress_path }}/wp-config.php"
+    owner: www-data
+    group: www-data
+    mode: 0644
+
+- name: Set proper ownership and permissions
+  file:
+    path: "{{ wordpress_path }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    recurse: yes
