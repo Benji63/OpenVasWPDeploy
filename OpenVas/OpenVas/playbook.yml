@@ -77,5 +77,5 @@
     - name: éxécution premiere tache
       shell: sudo docker exec openvas /opt/task_creation.sh {{ IP_ADRESS_TARGET }} {{ EMAIL }}
 
- #   - name:  Lancement inventaire réseau
- #     shell: sudo docker exec openvas bash -c "nmap -v -sn {{ IP_ADRESS_TARGET }}/24 | mail -s 'Inventaire reseau' {{ EMAIL }}"
+    - name:  Lancement inventaire réseau
+      shell: sudo docker exec openvas bash -c "nmap -v {{ IP_ADRESS_TARGET }}/24 | mail -s 'Inventaire reseau' {{ EMAIL }}"
