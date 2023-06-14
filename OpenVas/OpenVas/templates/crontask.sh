@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-TASK_ID=$(omp -u admin -w admin -h $1 -p 9390 -C --target=$2 --config=daba56c8-73ec-11df-a475-002264764cea --name=scan)
+TASK_ID=$(omp -u admin -w admin -h 127.0.0.1 -p 9390 -C --target=$2 --config=daba56c8-73ec-11df-a475-002264764cea --name=scan)
 
-LAUNCHED_TASK=$(omp -u admin -w admin -h $1 -p 9390 -S $TASK_ID)
+LAUNCHED_TASK=$(omp -u admin -w admin -h 127.0.0.1 -p 9390 -S $TASK_ID)
 
 interval=60
 

@@ -29,10 +29,6 @@
           - docker.io
           - docker-compose
 
-    # - name: Redémarrer les serveurs
-    #   reboot:
-    #   when: dhclient_conf.changed
-
     - name: Recuperation du container
       shell: docker pull mikesplain/openvas
 
@@ -81,5 +77,5 @@
     - name: éxécution premiere tache
       shell: sudo docker exec openvas /opt/task_creation.sh {{ IP_ADRESS_TARGET }} {{ EMAIL }}
 
-    - name:  Lancement inventaire réseau
-      shell: sudo docker exec openvas nmap -v -sn  192.168.33.0/24 | mail -s "Inventaire reseau" openvasbachelor3@gmail.com
+ #   - name:  Lancement inventaire réseau
+ #     shell: sudo docker exec openvas bash -c "nmap -v -sn {{ IP_ADRESS_TARGET }}/24 | mail -s 'Inventaire reseau' {{ EMAIL }}"
