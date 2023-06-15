@@ -1,62 +1,120 @@
 # OpenVasWPDeploy
+**Ce dépôt contient des instructions pour déployer OpenVAS sur Windows et Linux à l'aide de Vagrant et VirtualBox.**
 
-Ce dépôt contient des instructions pour déployer OpenVAS sur Windows et Linux à l'aide de Vagrant et VirtualBox.
-
-## Windows
-
-1. **Installer Vagrant** en téléchargeant l'installeur depuis le site officiel : [https://www.vagrantup.com/downloads](https://www.vagrantup.com/downloads)
-
-2. **Installer VirtualBox** version 6.1.44 en téléchargeant l'installeur depuis le site officiel : [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
-
-3. **Installer la dépendance VirtualBox CA Certificate** en suivant les instructions disponibles à cette adresse : [https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html)
-
-4. **Configurer la variable d'environnement** `SSL_CERT_FILE` avec le chemin vers le fichier `cacert.pem` dans votre dossier utilisateur. Exemple : `SSL_CERT_FILE = C:\Users\YourUsername\cacert.pem`
-
-5. **Cloner ce dépôt** en exécutant la commande suivante :
-git clone https://github.com/Benji63/OpenVasWPDeploy
+## 🛠️Windows : 
 
 
-6. **Générer une paire de clés SSH** en exécutant la commande suivante :
+1.  **Installer Vagrant** en téléchargeant l'installeur depuis le site officiel [ICI](https://developer.hashicorp.com/vagrant/downloads?product_intent=vagrant)
+
+2. **Installer virtualbox 6.1.44** [ICI](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1) ( Cliqué sur *Windows Hosts*)
+
+3. **Installer la dépendance VirtualBox CA Certificate** en suivant les instructions disponibles [ICI](https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack)
+
+4. **Installer une variable d'environement**[ICI](https://curl.se/docs/caextract.html) (*la derniere en date*)
+
+5.  **Copier**  la dans votre dossier puis faite en un raccourci 
+6. **Copier le chemin** entier de votre raccourci *(clique droit -> proprieté -> Emplacement :* )
+
+7. Rechercher `Variables` dans la barre de recherche windows puis cliqué sur `Modifier les variables d'environements`
+8. Cliqué sur `Variable d'environement`
+9. Faite en une nouvelle dans la partie `Variables Utilisateur`
+
+10. Donné comme nom : `SSL_CERT_FILE `
+11. Mettez le chemin du raccourci que vous avez auparavant copié dans `Valeur de la Variable`
+12. **Cloner ce dépôt** en exécutant la commande suivante : https://github.com/Benji63/OpenVasWPDeploy
+13. **Générer une paire de clés SSH** en exécutant la commande suivante dans un **powershell** en Admin :
 ssh-keygen -t rsa -b 4096 -f $HOME.ssh\id_rsa
 
+14. Si code d'erreur il faudra crée un dossier dans votre repertoire utilisateur avec comme nom : `.ssh`
 
-7. **Afficher le contenu de la clé publique** générée en exécutant la commande suivante :
-Get-Content $HOME.ssh\id_rsa.pub
+15. **Aller dans le dossier du projet**
+
+16. Lancer en administrateur : `LaunchVagrant.bat`
+
+## 🛠️Linux
+
+#### Ce tuto se realisera sous une distrubution UbuntuDesktop
+
+1. Recuperer les paquet  VirtualBox :
 
 
-8. **Accéder au dossier du projet cloné** et exécuter le fichier `.bat` pour lancer le déploiement.
+```
+ wget -O-https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+```
 
-## Linux
 
-1. **Importer la clé GPG d'Oracle VirtualBox** en exécutant les commandes suivantes :
+2. Specifier des chemins d'acces au paquet pour les commande `apt` :
 
-wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+```
 echo "deb [signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+```
+3. Installer le logiciel VirtualBox
 
-2. **Installer VirtualBox** version 6.1.44 en exécutant les commandes suivantes :
-sudo apt update
+```
 sudo apt install virtualbox-6.1
+
 sudo apt --fix-broken install
+
 sudo apt install virtualbox-6.1
+```
 
+4. Installer les extensions de VirtualBox 
 
-3. **Télécharger et installer l'extension Oracle VM VirtualBox** en téléchargeant le fichier `.vbox-extpack` depuis ce lien : [https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack](https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack). Ensuite, ouvrir VirtualBox, cliquer sur "Preferences", puis "Extensions", cliquer sur le bouton "+" et ajouter le fichier d'extension téléchargé.
+```
+https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack
+```
+5. Installer Vagrant :
 
-4. **Télécharger le certificat** depuis [https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html).
+```
+sudo apt install virtualbox
+```
 
-5. **Définir le chemin du certificat** téléchargé en tant que variable d'environnement.
+6. Lancer virtual box Cliquer sur preferences 
 
-6. **Générer une paire de clés SSH** en exécutant la commande suivante :
-ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa
+    - Aller dans extension 
 
+    - Cliqué sur plus puis ajouter l'extension pack telechargé auparavent
+    - Fermer virtual box
 
-7. **Installer Git** en exécutant la commande suivante :
+7. Faire la mise a jour des paquet 
+
+```
+sudo apt update | apt upgrade
+```
+8. Installer enfin le pack d'extension de VirtualBox : 
+ 
+```
+sudo apt install virtualbox-ext-pack Relancer virtual box elles est installée
+```
+
+9. Télécharger le certificat depuis le naviguateur :  https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html)
+
+10. **Depuis un CMD** mettre le path jusqu au certificat en tant que variable d environnement
+
+```
+ssh-keygen -t rsa -b 4096 -f $HOME.ssh\id_rsa
+```
+11. Intaller Git
+
+```
 sudo apt install git
+```
+12. Enfin cloner le projet dans le dossier de votre choix (via la commande `cd`): 
 
-
-8. **Cloner ce dépôt** en exécutant la commande suivante :
-
+```
 git clone https://github.com/Benji63/OpenVasWPDeploy
+```
+13. Aller dans le dossier 
+
+```
+cd OpenVasWPDeploy
+```
+14. Lancé la commande : 
+
+```
+LaunchVagrantLinux.sh
+```
 
 
-9. **Accéder au dossier du projet cloné** et exécuter le fichier `.sh` pour lancer le déploiement.
+
+        
