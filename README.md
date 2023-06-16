@@ -87,7 +87,7 @@ sudo apt update | apt upgrade
 sudo apt install virtualbox-ext-pack Relancer virtual box elles est installée
 ```
 
-9. Télécharger le certificat depuis le naviguateur :  https://curl.se/docs/caextract.html](https://curl.se/docs/caextract.html)
+9. Télécharger le certificat depuis le naviguateur :  (https://curl.se/ca/cacert-2023-05-30.pem)
 
 10. **Depuis un CMD** mettre le path jusqu au certificat en tant que variable d environnement
 
