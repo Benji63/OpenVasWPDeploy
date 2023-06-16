@@ -4,9 +4,9 @@
 ## 🛠️Windows : 
 
 
-1.  **Installer Vagrant** en téléchargeant l'installeur depuis le site officiel [ICI](https://developer.hashicorp.com/vagrant/downloads?product_intent=vagrant)
+1.  **Installer Vagrant** en téléchargeant l'installeur depuis le site officiel [ICI](https://releases.hashicorp.com/vagrant/2.3.7/vagrant_2.3.7_windows_amd64.msi)
 
-2. **Installer virtualbox 6.1.44** [ICI](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1) ( Cliqué sur *Windows Hosts*)
+2. **Installer virtualbox 6.1.44** [ICI](https://download.virtualbox.org/virtualbox/6.1.44/VirtualBox-6.1.44-156814-Win.exe)
 
 3. **Installer la dépendance VirtualBox CA Certificate** en suivant les instructions disponibles [ICI](https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack)
 
