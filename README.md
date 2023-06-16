@@ -10,7 +10,7 @@
 
 3. **Installer la dépendance VirtualBox CA Certificate** en suivant les instructions disponibles [ICI](https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack)
 
-4. **Installer une variable d'environement**[ICI](https://curl.se/docs/caextract.html) (*la derniere en date*)
+4. **Télécharger un certificat**[ICI](https://curl.se/ca/cacert-2023-05-30.pem)
 
 5.  **Copier**  la dans votre dossier puis faite en un raccourci 
 6. **Copier le chemin** entier de votre raccourci *(clique droit -> proprieté -> Emplacement :* )
