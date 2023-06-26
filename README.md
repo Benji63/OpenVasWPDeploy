@@ -1,6 +1,6 @@
 # OpenVasWPDeploy
 
-![Image]([https://ibb.co/J258pPy](https://ibb.co/J258pPy"><img src="https://i.ibb.co/FJgcYt0/Group-10.png))
+![Image](https://i.ibb.co/FJgcYt0/Group-10.png)
         
 **Ce dépôt contient des instructions pour déployer OpenVAS sur Windows et Linux à l'aide de Vagrant et VirtualBox.**
 
