@@ -15,11 +15,11 @@
 
 4. **Télécharger un certificat**[ICI](https://curl.se/ca/cacert-2023-05-30.pem)
 
-5.  **Copier**  le dans votre dossier puis faites en un raccourci 
-6. **Copier le chemin** entier de votre raccourci *(clique droit -> proprieté -> Emplacement :* )
+5.  **Copiez**  le dans votre dossier puis faites en un raccourci 
+6. **Copiez le chemin** entier de votre raccourci *(clique droit -> proprieté -> Emplacement :* )
 
-7. Rechercher `Variables` dans la barre de recherche Windows puis cliquer sur `Modifier les variables d'environements`
-8. Cliquer sur `Variable d'environement`
+7. Rechercherz`Variables` dans la barre de recherche Windows puis cliquer sur `Modifier les variables d'environements`
+8. Cliquez sur `Variable d'environement`
 9. Faites en une nouvelle dans la partie `Variables Utilisateur`
 
 10. Donner comme nom : `SSL_CERT_FILE `
@@ -27,7 +27,7 @@
 12. **Télécharger ce dépôt** en allant sur le site suivant le télécharger : https://github.com/Benji63/OpenVasWPDeploy
 13. **Puis le dézipper** dans le dossier de votre choix !
 14. **Générer une paire de clées SSH** en exécutant la commande suivante dans un **Powershell** en administrateur :
-ssh-keygen -t rsa -b 4096 -f $HOME\.ssh\id_rsa
+ssh-keygen -t rsa -b 4096 -f $HOME\\.ssh\id_rsa
 
 15. Si code d'erreur il faudra créer un dossier dans votre répertoire utilisateur avec comme nom : `.ssh`
 16. Se référer à la fin du tutoriel pour adapter le déploiement à votre infrastructure 
@@ -41,9 +41,9 @@ ssh-keygen -t rsa -b 4096 -f $HOME\.ssh\id_rsa
 
 ## 🛠️Linux
 
-#### Ce tuto se realisera sous une distrubution UbuntuDesktop
+#### Ce tutoriel sera réaliser sous une distrubution UbuntuDesktop
 
-1. Recuperer les paquets VirtualBox :
+1. Récuperer les paquets VirtualBox :
 
 
 ```
@@ -51,7 +51,7 @@ ssh-keygen -t rsa -b 4096 -f $HOME\.ssh\id_rsa
 ```
 
 
-2. Specifier des chemins d'acces au paquet pour les commande `apt` :
+2. Specifiez des chemins d'acces au paquet pour les commande `apt` :
 
 ```
 echo "deb [signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
@@ -96,11 +96,12 @@ vagrant --version
 ```
 sudo apt update | apt upgrade
 ```
-8. Installer enfin le pack d'extension de VirtualBox : 
+8. Installer enfin le pack d'extensions de VirtualBox : 
  
 ```
-sudo apt install virtualbox-ext-pack Relancer virtual box elles est installée
+sudo apt install virtualbox-ext-pack
 ```
+Relancer virtual box elle est installée
 
 9. Télécharger le certificat depuis le naviguateur :  (https://curl.se/ca/cacert-2023-05-30.pem)
 
@@ -145,9 +146,9 @@ LaunchVagrantLinux.sh
  
  ## 🛠️Changer les variables 
 
-1. Sous les 2 distribution aller dans le dossier (via la commande `cd` en linux)  `OpenVas/group_vars`
+1. Sous les 2 distributions aller dans le dossier (via la commande `cd` en linux)  `OpenVas/group_vars`
 2. Entrer dans le fichier **openvas** (via la commande `nano` sous linux) 
-3. Changer les variables pour les adapter a votre environement
+3. Changez les variables pour les adapter à votre environement
 
 
 
