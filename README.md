@@ -1,4 +1,7 @@
 # OpenVasWPDeploy
+
+![Image](https://ibb.co/J258pPy)
+        
 **Ce dépôt contient des instructions pour déployer OpenVAS sur Windows et Linux à l'aide de Vagrant et VirtualBox.**
 
 ## 🛠️Windows : 
@@ -27,12 +30,14 @@
 ssh-keygen -t rsa -b 4096 -f $HOME\.ssh\id_rsa
 
 15. Si code d'erreur il faudra créer un dossier dans votre répertoire utilisateur avec comme nom : `.ssh`
+16. Se référer à la fin du tutoriel pour adapter le déploiement à votre infrastructure 
 
-16. **Aller dans le dossier du projet**
+17. **Aller dans le dossier du projet**
 
-17. Lancer en administrateur : `LaunchVagrant.bat`
+18. Lancer en administrateur : `LaunchVagrant.bat`
 
-18. Vous n'avez plus qu'à attendre la fin de la création des machines et de l'éxécution des scripts puis regardez dans la boîte mail paramétrée que vous avez bien reçu le rapport par mail ! 
+19. Vous n'avez plus qu'à attendre la fin de la création des machines et de l'éxécution des scripts puis regardez dans la boîte mail paramétrée que vous avez bien reçu le rapport par mail ! 
+
 
 ## 🛠️Linux
 
@@ -64,7 +69,7 @@ sudo apt install virtualbox-6.1
 4. Installer les extensions de VirtualBox 
 
 ```
-https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack
+wget https://download.virtualbox.org/virtualbox/6.1.44/Oracle_VM_VirtualBox_Extension_Pack-6.1.44.vbox-extpack
 ```
 5. Installer Vagrant :
 
@@ -99,9 +104,12 @@ sudo apt install virtualbox-ext-pack Relancer virtual box elles est installée
 
 9. Télécharger le certificat depuis le naviguateur :  (https://curl.se/ca/cacert-2023-05-30.pem)
 
-10. **Depuis un CMD** mettre le path jusqu au certificat en tant que variable d'environnement
+
+
+10. Se rendre dans le fichier  : /etc/profile via la commande `sudo nano /etc/profile` et mettre le path jusqu au certificat en tant que variable d'environnement a la fin du fichier
+
 ```
-SSL_CERT_FILE=PATHTOCERT
+export SSL_CERT_FILE=PATHTOCERT
 ```
     
 11. **Générer la paire de clée SSH depuis un cmd**
@@ -124,6 +132,8 @@ git clone https://github.com/Benji63/OpenVasWPDeploy
 ```
 cd OpenVasWPDeploy
 ```
+15. Se référer à la fin du tutoriel pour adapter le déploiement à votre infrastructure 
+
 15. Lancer la commande : 
 
 ```
@@ -131,6 +141,23 @@ LaunchVagrantLinux.sh
 ```
 
 16. Vous n'avez plus qu'à attendre la fin de la création des machines et de l'éxécution des scripts puis regardez dans la boîte mail paramétrée que vous avez bien reçu le rapport par mail ! 
+
+ 
+ ## 🛠️Changer les variables 
+
+1. Sous les 2 distribution aller dans le dossier (via la commande `cd` en linux)  `OpenVas/group_vars`
+2. Entrer dans le fichier **openvas** (via la commande `nano` sous linux) 
+3. Changer les variables pour les adapter a votre environement
+
+
+
+
+## 🙇 Author
+#### Benjamin PIAT
+#### Jérôme DEFOUR
+#### Cedric GORCE
+        
+
 
 
 
