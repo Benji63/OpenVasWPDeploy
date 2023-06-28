@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   # Première machine virtuelle
   config.ssh.forward_agent = false
   config.vm.define "ubuntu_box" do |ubuntu|
-    ubuntu.vm.box = "generic/ubuntu2204"
+    ubuntu.vm.box = "fasmat/ubuntu2204-desktop"
     ubuntu.vm.network "private_network", ip: "192.168.33.12"
     ubuntu.vm.provider "virtualbox" do |v|
       v.memory = 4096

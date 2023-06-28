@@ -1,0 +1,11 @@
+[Unit]
+Description=Start OpenVAS Docker Container
+After=docker.service
+
+[Service]
+ExecStart=sudo docker start openvas
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target

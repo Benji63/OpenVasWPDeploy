@@ -20,6 +20,12 @@
         path: /etc/dhcp/dhclient.conf
       register: dhclient_conf
 
+    - name: Recuperation du container
+      shell: sudo add-apt-repository ppa:mozillateam/ppa -y
+        
+    - name: Recuperation du container
+      shell: sudo apt-get update
+      
     - name: Installation premiere partie des packages
       apt:
         name: "{{ item }}"
@@ -28,6 +34,7 @@
       loop:
           - docker.io
           - docker-compose
+          - firefox
 
     - name: Recuperation du container
       shell: docker pull mikesplain/openvas
@@ -48,7 +55,26 @@
     - name: Copie du fichier root
       template:
         src: root
-        dest: /opt/root   
+        dest: /opt/root 
+
+    - name: Copie du fichier crontask.sh   
+      template:
+        src: dockeropenvas.service 
+        dest: /etc/systemd/system/dockeropenvas.service
+
+    - name: Recharger les services systemd
+          systemd:
+            daemon_reload: yes
+
+
+    - name: activer service
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: yes
+      with_items:   
+          - dockeropenvas.service
+      
 
     - name: Copie du fichier task_creation.sh dans le docker
       shell: sudo docker cp /opt/task_creation.sh openvas:/opt/task_creation.sh
