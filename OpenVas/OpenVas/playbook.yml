@@ -63,19 +63,16 @@
         dest: /etc/systemd/system/dockeropenvas.service
 
     - name: Recharger les services systemd
-          systemd:
-            daemon_reload: yes
+      systemd:
+        daemon_reload: yes
 
 
     - name: activer service
       systemd:
-        name: "{{ item }}"
+        name: dockeropenvas.service
         state: started
         enabled: yes
-      with_items:   
-          - dockeropenvas.service
       
-
     - name: Copie du fichier task_creation.sh dans le docker
       shell: sudo docker cp /opt/task_creation.sh openvas:/opt/task_creation.sh
 
