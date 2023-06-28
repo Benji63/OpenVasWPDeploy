@@ -3,6 +3,11 @@
 ![Image](https://i.ibb.co/FJgcYt0/Group-10.png)
         
 **Ce dépôt contient des instructions pour déployer OpenVAS sur Windows et Linux à l'aide de Vagrant et VirtualBox.**
+## 💻Prerequis : 
+-  Windows 10/11 - ubuntu desktop
+- 16 Go de RAM
+- 50 Go de Stockage
+- Processeur Recent
 
 ## 🛠️Windows : 
 
