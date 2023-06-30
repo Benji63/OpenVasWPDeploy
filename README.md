@@ -42,7 +42,7 @@ ssh-keygen -t rsa -b 4096 -f $HOME\\.ssh\id_rsa
 
 17. **Aller dans le dossier du projet**
 
-18. Lancer en administrateur : `LaunchVagrant.bat`
+18. Lancer en administrateur : `LaunchVagrant.bat` (Si vous ne voulez pas installer wordpress mais seulement OpenVas lancez le script `DeployOpenVas.bat`)
 
 19. Vous n'avez plus qu'à attendre la fin de la création des machines et de l'éxécution des scripts puis regardez dans la boîte mail paramétrée que vous avez bien reçu le rapport par mail ! 
 
@@ -143,7 +143,7 @@ cd OpenVasWPDeploy
 ```
 15. Se référer à la fin du tutoriel pour adapter le déploiement à votre infrastructure 
 
-15. Lancer la commande : 
+15. Lancer la commande : (Si vous ne voulez pas installer wordpress mais seulement OpenVas lancez le script `DeployOpenVas.sh`)
 
 ```
 LaunchVagrantLinux.sh
