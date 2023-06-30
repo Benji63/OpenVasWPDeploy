@@ -4,7 +4,7 @@
         
 **Ce dépôt contient des instructions pour déployer OpenVAS sur Windows et Linux à l'aide de Vagrant et VirtualBox.**
 
-** Voici le lien de la vidéo qui prouve le bon fonctionnement du projet : ** [ICI](https://www.youtube.com/watch?v=oh4xd9b3LIM)
+Voici le lien de la vidéo qui prouve le bon fonctionnement du projet : [ICI](https://www.youtube.com/watch?v=oh4xd9b3LIM)
 
 ## 💻Prerequis : 
 -  Windows 10/11 - ubuntu desktop
