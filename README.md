@@ -165,7 +165,7 @@ LaunchVagrantLinux.sh
 #### Benjamin PIAT
 #### Jérôme DEFOUR
 #### Cedric GORCE
-#### Elise MILLOZ
+
         
 
 
